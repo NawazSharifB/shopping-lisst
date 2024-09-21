@@ -1,18 +1,19 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FilterOptionsComponent } from '../filter-options/filter-options.component';
 import { SearchOption } from '../interfaces/search-option';
 import { ProductService } from '../services/product.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { map, tap } from 'rxjs';
 import { Product } from '../interfaces/product';
+import { ProductItemComponent } from '../product-item/product-item.component';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
-  imports: [FilterOptionsComponent],
+  imports: [NgFor, NgIf, FilterOptionsComponent, ProductItemComponent],
 })
 export class LayoutComponent {
   productList: Product[] = [];
