@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-import { startWith, tap } from 'rxjs';
+import { Observable, startWith, tap } from 'rxjs';
 import { FilterOptionForm } from '../interfaces/filter-option-form';
 import { FilterOption } from '../enums/filter-option';
 import { SearchOption } from '../interfaces/search-option';
@@ -19,7 +19,7 @@ import { SearchOption } from '../interfaces/search-option';
   imports: [NgFor, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatOptionModule],
 })
 export class FilterOptionsComponent implements OnInit {
-  @Output() searchTermChange = new EventEmitter<Partial<SearchOption>>(); 
+  @Output() searchTermChange = new EventEmitter<SearchOption>(); 
   typeOptions = [
     { value: FilterOption.All, name: 'All Products'},
     { value: FilterOption.Electronics, name: 'Electronics'},
@@ -46,9 +46,11 @@ export class FilterOptionsComponent implements OnInit {
   }
 
   private onFilterChange(): void {
-    this.filterForm.valueChanges.pipe(
-      startWith({search: '', option: FilterOption.All }),
-      tap((value) => this.searchTermChange.emit(value)),
+    const initialValue: SearchOption = <SearchOption>this.filterForm.value;
+
+    (<Observable<SearchOption>>this.filterForm.valueChanges).pipe(
+      startWith(initialValue),
+      tap((value: SearchOption) => this.searchTermChange.emit(value)),
       takeUntilDestroyed(this.destroyRef),
     ).subscribe();
   }
