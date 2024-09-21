@@ -5,8 +5,33 @@ $gap: 16px;
   gap: $gap;
   justify-content: flex-start;
   flex-flow: row wrap;
+  align-items:stretch;
 
   .product {
-    flex: 0 1 calc(33% - $gap);
+    flex: 0 1 calc(100% / 3 - $gap);
+    align-self: stretch;
+  }
+}
+
+.no-product {
+  display: flex;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 860px) {
+  .products {
+    .product {
+      flex: 0 1 calc(100% / 2 - $gap);
+    }
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  .products {
+    flex-flow: column nowrap;
+
+    .product {
+      flex: 1 1 100%;
+    }
   }
 }
