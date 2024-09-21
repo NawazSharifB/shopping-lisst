@@ -1,9 +1,1 @@
-<app-filter-options (searchTermChange)="onSearchTermChange($event)" ></app-filter-options>
-
-<div class="products" *ngIf="productList.length">
-  <app-product-item class="product" *ngFor="let product of productList" [product]="product"></app-product-item>
-</div>
-
-<div class="no-product" *ngIf="!productList.length">
-  No product to display
-</div>
+<app-display-products></app-display-products>
