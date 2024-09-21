@@ -21,14 +21,9 @@ export class DisplayProductsComponent {
   private readonly DestroyRef = inject(DestroyRef);
   private readonly productService = inject(ProductService);
   
-  onSearchTermChange(searchTerm: Partial<SearchOption>): void {
-    this.fetchItems(searchTerm);
-  }
-
-  private fetchItems(searchTerm: Partial<SearchOption>): void {
-    this.productService.fetchProduct().pipe(
+  onSearchTermChange(searchTerm: SearchOption): void {
+    this.productService.fetchProduct(searchTerm).pipe(
       tap(value => console.log(value)),
-      map(() => this.productService.filterProducts(searchTerm)),
       tap(products => this.productList = products),
       takeUntilDestroyed(this.DestroyRef)).subscribe();
   }

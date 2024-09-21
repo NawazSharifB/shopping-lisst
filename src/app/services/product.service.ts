@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Product } from '../interfaces/product';
 import { SearchOption } from '../interfaces/search-option';
 import { FilterOption } from '../enums/filter-option';
@@ -9,21 +9,26 @@ import { FilterOption } from '../enums/filter-option';
   providedIn: 'root'
 })
 export class ProductService {
-  private readonly products$ = new BehaviorSubject<Product[]>([]);
 
   private readonly httpClient = inject(HttpClient);
 
-  fetchProduct(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>('../../assets/list-items.json').pipe(tap(value => this.products$.next(value)));
+  fetchProduct(searchTerm: SearchOption): Observable<Product[]> {
+    return this.httpClient.get<Product[]>('../../assets/list-items.json').pipe(
+      map((products: Product[]) => this.filterProducts(searchTerm, products)),
+    )
   }
 
-  filterProducts(searchTerm: Partial<SearchOption>): Product[] {
-    return this.products$.value.filter(product => product.name.toLowerCase().includes(searchTerm.search?.toLowerCase() || '')).filter(product => {
-      if (searchTerm.option === FilterOption.All) {
-        return true;
-      }
+  private filterProducts(searchTerm: SearchOption, products: Product[]): Product[] {
+    return products.filter(product => 
+      this.filterProductBySearchTerm(searchTerm.search, product) && this.filterProductsByCategory(searchTerm.option, product)
+    );
+  }
 
-      return product.category === searchTerm.option;
-    });
-  } 
+  private filterProductBySearchTerm(searchTerm: string, product: Product): boolean {
+    return !!!searchTerm || product.name.toLowerCase().includes(searchTerm.toLowerCase());
+  }
+
+  private filterProductsByCategory(option: FilterOption, product: Product): boolean {
+    return option === FilterOption.All || product.category === option;
+  }
 }
