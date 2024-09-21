@@ -25,6 +25,8 @@ export class DisplayProductsComponent {
     this.productService.fetchProduct(searchTerm).pipe(
       tap(value => console.log(value)),
       tap(products => this.productList = products),
-      takeUntilDestroyed(this.DestroyRef)).subscribe();
+      takeUntilDestroyed(this.DestroyRef)
+    )
+    .subscribe();
   }
 }
