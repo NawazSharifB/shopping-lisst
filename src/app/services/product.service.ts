@@ -18,7 +18,7 @@ export class ProductService {
   }
 
   filterProducts(searchTerm: Partial<SearchOption>): Product[] {
-    return this.products$.value.filter(product => product.name.includes(searchTerm.search || '')).filter(product => {
+    return this.products$.value.filter(product => product.name.toLowerCase().includes(searchTerm.search?.toLowerCase() || '')).filter(product => {
       if (searchTerm.option === FilterOption.All) {
         return true;
       }
