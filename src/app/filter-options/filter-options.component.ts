@@ -1,12 +1,14 @@
 import { Component, DestroyRef, EventEmitter, inject, OnInit, Output } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { NgFor, NgIf } from '@angular/common';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-import { Observable, startWith, tap } from 'rxjs';
+import { debounceTime, Observable, startWith, tap } from 'rxjs';
 import { FilterOptionForm } from '../interfaces/filter-option-form';
 import { FilterOption } from '../enums/filter-option';
 import { SearchOption } from '../interfaces/search-option';
@@ -16,7 +18,7 @@ import { SearchOption } from '../interfaces/search-option';
   standalone: true,
   templateUrl: './filter-options.component.html',
   styleUrls: ['./filter-options.component.scss'],
-  imports: [NgFor, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatOptionModule],
+  imports: [NgFor, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatOptionModule, MatButtonModule, MatIconModule, NgIf],
 })
 export class FilterOptionsComponent implements OnInit {
   @Output() searchTermChange = new EventEmitter<SearchOption>(); 
@@ -43,6 +45,10 @@ export class FilterOptionsComponent implements OnInit {
 
   get optionControl(): FormControl {
     return this.filterForm.controls.option;
+  }
+
+  clearSearch(): void {
+    this.searchControl.reset();
   }
 
   private onFilterChange(): void {
