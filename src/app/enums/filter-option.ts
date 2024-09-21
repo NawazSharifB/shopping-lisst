@@ -1,6 +1,6 @@
 export enum FilterOption {
-  All = 'all',
-  Electronics = 'electronics',
-  Clothing = 'clothing',
-  Accessories = 'accessories',
+  All = 'All',
+  Electronics = 'Electronics',
+  Clothing = 'Clothing',
+  Accessories = 'Accessories',
 }
