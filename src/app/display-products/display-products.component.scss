@@ -1,0 +1,12 @@
+$gap: 16px;
+
+.products {
+  display: flex;
+  gap: $gap;
+  justify-content: flex-start;
+  flex-flow: row wrap;
+
+  .product {
+    flex: 0 1 calc(33% - $gap);
+  }
+}
