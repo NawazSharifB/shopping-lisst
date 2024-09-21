@@ -8,10 +8,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-import { debounceTime, Observable, startWith, tap } from 'rxjs';
-import { FilterOptionForm } from '../interfaces/filter-option-form';
-import { FilterOption } from '../enums/filter-option';
-import { SearchOption } from '../interfaces/search-option';
+import { Observable, startWith, tap } from 'rxjs';
+import { SearchOption } from '../../interfaces/search-option';
+import { FilterOption } from '../../enums/filter-option';
+import { FilterOptionForm } from '../../interfaces/filter-option-form';
 
 @Component({
   selector: 'app-filter-options',
