@@ -1,5 +1,11 @@
 $gap: 16px;
 
+.container {
+  min-width: 420px;
+  height: 100%;
+  overflow-x: auto;
+}
+
 .products {
   display: flex;
   gap: $gap;

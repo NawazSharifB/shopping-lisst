@@ -1,10 +1,14 @@
 .wrapper {
+  display: flex;
+  height: 100%;
+  flex-flow: column nowrap;
   background-color: #fafafa;
 }
 
 .container {
   width: 90%;
   max-width: 1160px;
+  height: 100%;
   margin: 0 auto;
   padding: 8px;
   background-color: white;

@@ -1,8 +1,8 @@
 <mat-card class="product-container">
   <div class="product">
-    <h1>{{product.name}}</h1>
-    <h2>{{product.price}}</h2>
-    <h3>{{product.category}}</h3>
-    <h4>{{product.description}}</h4>
+    <div class="name">{{product.name}}</div>
+    <app-product-info label="Price" [value]="product.price"></app-product-info>
+    <app-product-info label="Category" [value]="product.category"></app-product-info>
+    <div class="description">{{product.description}}</div>
   </div>
 </mat-card>

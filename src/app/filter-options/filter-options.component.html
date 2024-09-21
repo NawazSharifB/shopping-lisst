@@ -1,9 +1,11 @@
 <div class="filter">
   <mat-form-field class="search">
+    <mat-label>Search Product</mat-label>
     <input [formControl]="searchControl" matInput placeholder="Search by item name">
   </mat-form-field>
 
   <mat-form-field>
+    <mat-label>Choose category</mat-label>
     <mat-select [formControl]="optionControl">
       <ng-container *ngFor="let option of typeOptions">
         <mat-option  [value]="option.value">{{ option.name }}</mat-option>

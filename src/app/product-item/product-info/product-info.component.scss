@@ -1,0 +1,20 @@
+$labelColor: #818181;
+
+.container {
+  display: flex;
+  flex: row nowrap;
+  gap: 4px;
+
+  .label {
+    color: $labelColor;
+    flex-basis: 30px;
+  }
+
+  .colon {
+    color: $labelColor;
+  }
+
+  .value {
+    color: #0ed80e;
+  }
+}
